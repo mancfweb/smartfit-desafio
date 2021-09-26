@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { useLayoutEffect } from 'react'
+import { useEffect } from 'react'
 
 import { LocationsSearchShape } from '../utils/shapes/locations'
 import { useLocations } from '../hooks/useLocations'
@@ -13,7 +13,7 @@ import UnitsList from '../components/UnitsList'
 export default function Home({ data }) {
   const { buildInitialData } = useLocations()
 
-  useLayoutEffect(() => buildInitialData(data), [data, buildInitialData])
+  useEffect(() => buildInitialData(data), [data, buildInitialData])
 
   return (
     <Layout>
