@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 
 import { useLocations } from '../../hooks/useLocations'
 
@@ -6,7 +6,7 @@ import Button from '../Button'
 
 import * as S from './styles'
 
-const schedulesOptions = [
+export const schedulesOptions = [
   {
     value: 'manha',
     period: 'Manhã',
@@ -25,30 +25,42 @@ const schedulesOptions = [
 ]
 
 const Search = () => {
-  const { locations, searchLocations, previewSearchLocations } = useLocations()
+  const firstRender = useRef(true)
+  const { locations, searchLocations, previewSearchLocations, cleanSearch } =
+    useLocations()
   const { data, loading } = locations
 
-  const [schedule, setSchedule] = useState('')
-  const [showClosed, setShowClosed] = useState(false)
+  const [fields, setFields] = useState({
+    schedule: '',
+    showClosed: false
+  })
+
+  const handleOnChange = (field, value) => {
+    setFields((prev) => ({ ...prev, [field]: value }))
+  }
 
   const handleSubmit = async (event) => {
     event.preventDefault()
 
-    await searchLocations(schedule, showClosed)
+    await searchLocations(fields.schedule, fields.showClosed)
   }
 
   const handleReset = async () => {
-    setSchedule('')
-    setShowClosed(false)
-    await previewSearchLocations('', false)
+    setFields({
+      schedule: '',
+      showClosed: false
+    })
+    cleanSearch()
   }
 
   useEffect(() => {
-    if (!loading) {
-      previewSearchLocations(schedule, showClosed)
+    if (firstRender.current) {
+      firstRender.current = false
+      return
     }
+    previewSearchLocations(fields.schedule, fields.showClosed)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [schedule, showClosed])
+  }, [fields])
 
   return (
     <S.Container>
@@ -65,8 +77,8 @@ const Search = () => {
                 type="radio"
                 name="schedule"
                 value={option.value}
-                checked={schedule === option.value}
-                onChange={() => setSchedule(option.value)}
+                checked={fields.schedule === option.value}
+                onChange={() => handleOnChange('schedule', option.value)}
               />
               <label htmlFor={option.value}>
                 <span>{option.period}</span>
@@ -82,8 +94,8 @@ const Search = () => {
               type="checkbox"
               name="show_closed"
               id="show_closed"
-              checked={showClosed}
-              onChange={() => setShowClosed((prev) => !prev)}
+              checked={fields.showClosed}
+              onChange={() => handleOnChange('showClosed', !fields.showClosed)}
             />
             <label htmlFor="show_closed">Exibir unidades fechadas</label>
           </div>

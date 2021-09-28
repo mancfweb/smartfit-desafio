@@ -11,8 +11,8 @@ const options = ['mask', 'towel', 'fountain', 'locker_room']
 
 const UnitCard = ({ data }) => (
   <S.Container>
-    <S.Status $opened={data.opened}>
-      {data.opened ? 'Aberto' : 'Fechado'}
+    <S.Status $opened={data.available}>
+      {data.available ? 'Aberto' : 'Fechado'}
     </S.Status>
 
     <h3>{data.title}</h3>
@@ -22,7 +22,7 @@ const UnitCard = ({ data }) => (
       dangerouslySetInnerHTML={{ __html: data.content }}
     />
 
-    {data.opened && (
+    {data.available && (
       <>
         <hr />
 

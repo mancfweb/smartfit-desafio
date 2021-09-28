@@ -19,6 +19,7 @@ const Meta = () => (
       sizes="16x16"
       href="/favicon/favicon-16x16.png"
     />
+    <link rel="icon" type="image/png" href="/favicon/favicon-16x16.png" />
     <meta name="msapplication-TileColor" content="#ffffff" />
     <meta name="theme-color" content="#ffffff" />
     <meta name="description" content="Smart Fit - Unidades" />

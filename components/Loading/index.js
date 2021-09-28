@@ -1,7 +1,7 @@
 import * as S from './styles'
 
 const Loading = () => (
-  <S.Container>
+  <S.Container data-testid="loading-element">
     <svg className="spinner" viewBox="22 22 44 44">
       <circle
         className="circle"

@@ -1,13 +1,15 @@
 {
     "env": {
         "browser": true,
-        "es2021": true
+        "es2021": true,
+        "jest/globals": true
     },
     "extends": [
         "next/core-web-vitals",
         "plugin:react/recommended",
         "airbnb",
-        "prettier"
+        "prettier",
+        "plugin:jest/recommended"
     ],
     "parserOptions": {
         "ecmaFeatures": {
@@ -19,7 +21,8 @@
     "plugins": [
         "react",
         "react-hooks",
-        "prettier"
+        "prettier",
+        "jest"
     ],
     "ignorePatterns": ["build"],
     "rules": {
@@ -29,6 +32,11 @@
         "react/jsx-props-no-spreading": "off",
         "react/react-in-jsx-scope": "off",
         "react-hooks/rules-of-hooks": "error",
-        "prettier/prettier": "error"
+        "prettier/prettier": "error",
+        "jest/no-disabled-tests": "warn",
+        "jest/no-focused-tests": "error",
+        "jest/no-identical-title": "error",
+        "jest/prefer-to-have-length": "warn",
+        "jest/valid-expect": "error"
     }
 }

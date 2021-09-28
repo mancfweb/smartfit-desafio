@@ -1,5 +1,10 @@
 import PropTypes from 'prop-types'
 
+export const AvailabilityShape = {
+  day: PropTypes.oneOf(['weekday', 'saturday', 'sunday']).isRequired,
+  hours: PropTypes.arrayOf(PropTypes.number).isRequired
+}
+
 export const LocationsShape = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
@@ -9,6 +14,8 @@ export const LocationsShape = {
   towel: PropTypes.oneOf(['required', 'recommended']).isRequired,
   fountain: PropTypes.oneOf(['partial', 'not_allowed']).isRequired,
   locker_room: PropTypes.oneOf(['allowed', 'partial', 'closed']).isRequired,
+  availability: PropTypes.arrayOf(PropTypes.shape(AvailabilityShape)),
+  available: PropTypes.bool.isRequired,
   schedules: PropTypes.arrayOf(
     PropTypes.shape({
       weekdays: PropTypes.string.isRequired,

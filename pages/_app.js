@@ -7,8 +7,9 @@ import theme from '../styles/theme'
 import { LocationsProvider } from '../contexts/LocationsContext'
 
 function MyApp({ Component, pageProps }) {
+  const { data } = pageProps
   return (
-    <LocationsProvider>
+    <LocationsProvider initialData={data}>
       <GlobalStyle />
       <ThemeProvider theme={theme}>
         <Component {...pageProps} />
