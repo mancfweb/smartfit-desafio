@@ -6,11 +6,13 @@ import Search, { schedulesOptions } from '.'
 
 const mockSearchLocations = jest.fn()
 const mockPreviewSearchLocations = jest.fn()
+const mockCleanSearch = jest.fn()
 
 jest.mock('../../hooks/useLocations', () => ({
   useLocations: () => ({
     previewSearchLocations: mockPreviewSearchLocations,
     searchLocations: mockSearchLocations,
+    cleanSearch: mockCleanSearch,
     locations: {
       data: mockLocations,
       loading: false
@@ -79,6 +81,7 @@ describe('<Search />', () => {
     userEvent.click(resetButton)
 
     await waitFor(() => {
+      expect(mockCleanSearch).toHaveBeenCalledTimes(1)
       expect(mockPreviewSearchLocations).toHaveBeenCalled()
     })
   })
