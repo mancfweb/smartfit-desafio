@@ -90,6 +90,7 @@ export const Form = styled.form`
   .actions {
     display: flex;
     flex-direction: column;
+    align-items: center;
 
     button {
       width: 100%;

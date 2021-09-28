@@ -20,6 +20,7 @@ export const Container = styled.button`
   ${({ $loading }) =>
     $loading &&
     css`
+      min-height: 3.111rem;
       & > span {
         position: absolute;
         left: 50%;
